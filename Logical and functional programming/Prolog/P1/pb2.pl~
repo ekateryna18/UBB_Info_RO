@@ -1,0 +1,71 @@
+%Problema 2a.
+%Functie pentru cel mai mare divizor comun
+%cmmdc(A:Intreg, B:Intreg, X:Intreg)
+%a - primul numar
+%b - al doilea numar
+%X - cel mai mare divizor comun dintre a si b
+%Modele de flux(i,i,o),(i,i,i)
+cmmdc(A,B,X):- A<0, A1 is abs(A), cmmdc(A1,B,X).
+cmmdc(A,B,X):- B<0, B1 is abs(B),cmmdc(A,B1,X).
+cmmdc(0,B,B).%:- B>0, X is B.
+cmmdc(A,0,A).%:- A>0, X is A.
+cmmdc(A,B,X):- A=B, X is A.
+cmmdc(A,B,X):- A>B,cmmdc(B,A,X).
+cmmdc(A,B,X):- A<B, B1 is B-A, cmmdc(A,B1,X).
+
+%Functie pentru cel mai mic multiplu comun
+%cmmmc(X:Intreg,Y:Intreg,Z:Intreg)
+%X - primul numar
+%Y - al doilea numar
+%Z - cel mai mic multiplu comun dintre X si Y
+%Modele de flux (i,i,o), (i,i,i)
+cmmmc(X,Y,Z):- cmmdc(X,Y,R),Z is (X*Y) div R.
+
+%Predicat care determina cel mai mic multiplu comun al elementelor
+%unei liste formate din numere intregi
+%cmmmc_lista(L:lista, R: Intreg)
+% L - lista pentru care calculam cel mai mic multiplu comun al
+% numerelor
+% R - cel mai mic multiplu comun al numerelor din lista
+%Modele de flux (i,o), (i,i)
+cmmmc_lista([],0):-!. %daca lista este vida, cmmmc este 0
+cmmmc_lista([E],E).
+cmmmc_lista([E1,E2],R):- cmmmc(E1,E2,R1), R is R1.
+cmmmc_lista([H|[H1|T]],R):- cmmmc(H,H1,R1),cmmmc_lista([R1|T],R).
+
+%Problema 2b
+%insereaza(L:lista,V:Element,M:Intreg,L:Intreg,R:lista)
+%L - lista in care se insereaza
+%V - elementul de inserat
+%M - contor pentru pozitiile de inserare
+%L - contor pentru lungimea listei initialeL
+%R - lista rezultat dupa inserari
+%Modele de flux (i,i,i,i,o), (i,i,i,i,i)
+insereaza([],V,M,M,[V]).
+insereaza([],_,M,L,[]):-L\=M.
+%insereaza([E],V,1,0,[E,V]).
+insereaza([H|T],V,M,L,[H|R]):- L\=M, L1 is L+1,insereaza(T,V,M,L1,R).
+insereaza([H|T],V,M,L,[V|R]):-L=M, M1 is M*2, insereaza([H|T],V,M1,L,R).
+
+%insereaza_lista(L:lista,V:Element,R:Lista
+%L - lista in care se insereaza elementul V
+%V - elementul de inserat in lista L
+%R - lista rezultat
+insereaza_lista(L,V,R):-insereaza(L,V,1,0,R).
+
+%Exemple de test
+%Problema 2a
+ex2a_1(R):-cmmmc_lista([],R).
+ex2a_2(R):-cmmmc_lista([5],R).
+ex2a_3(R):-cmmmc_lista([2,5],R).
+ex2a_4():-cmmmc_lista([-2,-5],10).
+ex2a_5():-cmmmc_lista([19,19],19).
+ex2a_6():-cmmmc_lista([2,3,4,7,8,9],504).
+ex2a_7():-cmmmc_lista([12,0],0).
+%Problema 2b
+ex2b_1(R):-insereaza_lista([],0,R).
+ex2b_2(R):-insereaza_lista([1],0,R).
+ex2b_3(R):-insereaza_lista([1,2,3,4],0,R).
+ex2b_4():-insereaza_lista([1,2,3,4,5,6,7,8,9],0,[1,0,2,0,3,4,0,5,6,7,8,0,9]).
+
+

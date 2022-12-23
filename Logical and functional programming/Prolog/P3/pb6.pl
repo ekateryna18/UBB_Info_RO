@@ -1,0 +1,53 @@
+%6. Sa se genereze toate sirurile de n paranteze ce se inchid corect.
+% Exemplu: n=4 sunt 2 solutii: (()) si ()()
+
+%genereaza paranteze
+paranteza('(').
+paranteza(')').
+
+%verifica(L: list, C: Integer)
+%L: lista de paranteze pe care o verificam
+%C: contor pentru verificare daca toate parantezele sunt inchise
+%Model de flux (i,i)
+verifica([],0).
+verifica([H|T], C):-
+    H=='(',
+    C1 is C+1,
+    verifica(T,C1).
+verifica([H|T], C):-
+    H==')',
+    C>0,
+    C1 is C-1,
+    verifica(T,C1).
+
+%combinari(N:Integer, I: Integer, C:List, R:List)
+%N: numarul de paranteze
+%I: contor paranteze folosite
+%C: lista de combinari de paranteze
+%R: lista rezultat
+%Model de flux: (i,i,i,o)nedeterminist, (i,i,i,i) determinist
+combinari(N,N,C,C):-!.
+combinari(N,I,C,R):-
+    paranteza(X),
+    I1 is I+1,
+    combinari(N,I1,[X|C],R).
+
+%solutie(N: Integer, R: List)
+%N: numarul de paranteze
+%R: lista rezultat
+%Model de flux (i,o) nedeterminist, (i,i) determinist
+
+solutie(N,R):-
+    combinari(N,0,[],R),
+    verifica(R,0).
+
+%totalsolutii(N: integer, R: list)
+%%N: numarul de paranteze
+%R: lista rezultat cu liste rezultat de paranteze
+%Model de flux (i,o)nedeterminist, (i,i) determinist
+totalsolutii(N,R):-
+    findall(RSolutie, solutie(N,RSolutie), R).
+
+ex1(R):-totalsolutii(4,R).
+ex2(R):-totalsolutii(7,R).
+

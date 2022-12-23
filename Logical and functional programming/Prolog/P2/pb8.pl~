@@ -1,0 +1,20 @@
+%inverseaza lista
+inverseaza([],C,C):-!.
+inverseaza([H|T],C,R):-
+    inverseaza(T,[H|C],R).
+
+inverseazaLista([H|T],R):-inverseaza([H|T],[],R).
+
+%suma(A,B,C,R)
+
+suma([],0,[]).
+suma([],1,[1]).
+suma([BH|BT],C,[B|R]):-
+    B is (BH+C) mod 10,
+    B-BH-C=:=0,
+    suma(BT,0,R).
+suma([BH|BT],C,[B|R]):-
+    B is (BH+C) mod 10,
+    B-BH-C=\=0,
+    suma(BT,1,R).
+

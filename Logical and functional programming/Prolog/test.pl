@@ -1,0 +1,60 @@
+%lungime(L:List,N:integer,R:integer)=
+%    R, daca lista este []
+%Model de flux(i,i,o)
+lungime([],R,R).
+lungime([_|T],N,R):-
+    N1 is N+1,
+    lungime(T,N1,R).
+
+adauga([],E,[E]).
+adauga([H|T],E,[H|R]):-
+    adauga(T,E,R).
+
+%split(L:list,S:list,D:list,R:list)
+%split(l1,...ln,S1,...sn,R)
+%   return, daca abs(lungime(L)-lungime(C))<=1
+%   split(adauga(l1,..ln,)
+split(L,C,C,L):-
+    lungime(L,0,RD),
+    lungime(C,0,RS),
+    DIF is RD-RS,
+    abs(DIF,AUX),
+    AUX =< 1,!.
+
+split([H|T],C,S,D):-
+    adauga(C,H,RC),
+    split(T,RC,S,D).
+
+%splitList(L:list,S:list,D:list)
+splitList(L,S,D):-split(L,[],S,D).
+
+%merge(S:list,D:list,R:list)
+my_merge(S,[],S):-!.
+my_merge([],D,D):-!.
+my_merge([HS|TS],[HD|TD],[HS|R]):-
+    HS=<HD,
+    my_merge(TS,[HD|TD],R).
+my_merge([HS|TS],[HD|TD],[HD|R]):-
+    HD<HS,
+    my_merge([HS|TS],TD,R).
+
+merge_sort([E],[E]).
+merge_sort(L,R):-
+    splitList(L,S,D),
+    merge_sort(S,RS),
+    merge_sort(D,RD),
+    my_merge(RS,RD,R).
+
+eliminaDubl([],[]):-!.
+eliminaDubl([E],[E]):-!.
+eliminaDubl([H1,H2|T],[H1|R]):-
+    H1=\=H2,
+    eliminaDubl([H2|T],R).
+eliminaDubl([H1,H2|T],R):-
+    H1=:=H2,
+    eliminaDubl([H2|T],R).
+
+sort_list(L,R):-
+    merge_sort(L,RL),
+    eliminaDubl(RL,R).
+
