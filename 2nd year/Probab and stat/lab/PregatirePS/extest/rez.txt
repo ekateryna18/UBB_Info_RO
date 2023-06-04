@@ -1,0 +1,40 @@
+function modelTest
+      x = normrnd(100,20,1,1000);
+      minim = min(x);
+      maxim = max(x);
+      fav = 0;
+      for step = 1:1000;
+          if x(step) < 140 && x(step )> 80;
+            fav = fav + 1;
+          endif
+      endfor
+      p = fav/1000
+
+      [_,XX] = hist(x,13);
+      hist(x,XX,13/(maxim-minim+1))
+
+      i = 0.1;
+      hold on
+      for  j = minim:i:maxim;
+          y = normpdf(j,100,20);
+          plot(j,y,'r')
+       endfor
+	normcdf(140,100,20)-normcdf(80,100,20)
+end
+
+%petec
+pkg load statistics;
+clf; grid on; hold on;
+
+# X ~ N(100, 20)
+miu = 100;
+sigma = 20;
+generated = 1000;
+values = normrnd(miu, sigma, 1, generated);
+disp("Estimarea probabilitatii evenimentului A:")
+disp(sum(abs(values -  110) < 30) / generated)
+
+disp("Valoarea probabilitatii evenimentului A:")
+disp(normcdf(140, miu, sigma) - normcdf(80, miu, sigma))
+
+hist(X, 13);

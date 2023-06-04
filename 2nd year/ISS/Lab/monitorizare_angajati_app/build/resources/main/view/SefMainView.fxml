@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="713.0" prefWidth="829.0" style="-fx-background-color: #292d3b;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uiController.SefController">
+   <children>
+      <AnchorPane layoutX="41.0" layoutY="22.0" prefHeight="674.0" prefWidth="748.0" style="-fx-background-color: #353a4d; -fx-background-radius: 20;">
+         <children>
+            <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="98.0" prefWidth="215.0" style="-fx-background-color: #41475e; -fx-background-radius: 15; -fx-border-color: #9BA3EB; -fx-border-radius: 15;">
+               <children>
+                  <AnchorPane layoutX="14.0" layoutY="12.0" pickOnBounds="false" prefHeight="74.0" prefWidth="95.0" style="-fx-background-color: #F6BE00; -fx-background-radius: 20;" />
+                  <Text fill="WHITE" layoutX="119.0" layoutY="27.0" opacity="0.56" strokeType="OUTSIDE" strokeWidth="0.0" text="Sef logged in" wrappingWidth="111.10137939453125">
+                     <font>
+                        <Font name="Berlin Sans FB" size="14.0" />
+                     </font>
+                  </Text>
+                  <Label id="usernameTopLabel" fx:id="usernameLabel" layoutX="119.0" layoutY="38.0" prefHeight="22.0" prefWidth="88.0" text="username" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="11.0" layoutY="122.0" prefHeight="254.0" prefWidth="706.0" style="-fx-border-color: #9BA3EB; -fx-border-radius: 15;">
+               <children>
+                  <TableView id="tableViewSarcini" fx:id="tableViewSarcini" layoutX="14.0" layoutY="45.0" prefHeight="188.0" prefWidth="520.0" style="-fx-background-color: #41475e;">
+                     <columns>
+                        <TableColumn id="descrierieCol" fx:id="descrierieCol" minWidth="0.0" prefWidth="245.59996795654297" style="-fx-background-color: #9299d6;" text="Descriere" />
+                        <TableColumn id="statusCol" fx:id="statusCol" prefWidth="128.0" style="-fx-background-color: #8086bd;" text="Status" />
+                        <TableColumn id="sefCol" fx:id="sefCol" prefWidth="145.60000610351562" style="-fx-background-color: #9299d6;" text="Sef" />
+                     </columns>
+                  </TableView>
+                  <Label id="nameLabel" fx:id="nameLabel1" layoutX="14.0" layoutY="12.0" prefHeight="23.0" prefWidth="174.0" style="-fx-border-color: #9BA3EB; -fx-border-radius: 7;" text="   Sarcinile angajatilor" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="18.0" />
+                     </font>
+                  </Label>
+                  <Button id="modificaBtn" fx:id="modificaBtn" layoutX="549.0" layoutY="45.0" mnemonicParsing="false" onAction="#modifica_sarcina" prefHeight="27.0" prefWidth="142.0" style="-fx-background-color: #C0DBEA;" text="Modifica" textFill="#474a6b">
+                     <font>
+                        <Font name="Berlin Sans FB" size="15.0" />
+                     </font>
+                  </Button>
+                  <Label id="nameLabel" fx:id="nameLabel11" layoutX="549.0" layoutY="12.0" prefHeight="23.0" prefWidth="142.0" style="-fx-border-color: #9BA3EB; -fx-border-radius: 7;" text=" Operatii sarcini" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="18.0" />
+                     </font>
+                  </Label>
+                  <Button id="stergereBtn" fx:id="stergereBtn" layoutX="549.0" layoutY="199.0" mnemonicParsing="false" onAction="#sterge_sarcina" prefHeight="27.0" prefWidth="142.0" style="-fx-background-color: #C0DBEA;" text="Sterge" textFill="#474a6b">
+                     <font>
+                        <Font name="Berlin Sans FB" size="15.0" />
+                     </font>
+                  </Button>
+                  <TextField id="searchField" fx:id="descrNouaField" focusTraversable="false" layoutX="552.0" layoutY="84.0" prefHeight="88.0" prefWidth="136.0" promptText="Descriere noua" style="-fx-background-color: #404258; -fx-border-color: #9BA3EB; -fx-background-radius: 10; -fx-border-radius: 10; -fx-text-fill: white;" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="11.0" layoutY="399.0" prefHeight="254.0" prefWidth="706.0" style="-fx-border-color: #9BA3EB; -fx-border-radius: 15;">
+               <children>
+                  <TableView id="tableViewSarcini" fx:id="tableViewAngajati" layoutX="240.0" layoutY="52.0" prefHeight="188.0" prefWidth="459.0" style="-fx-background-color: #41475e;">
+                     <columns>
+                        <TableColumn id="descrierieCol" fx:id="usernameCol" minWidth="0.0" prefWidth="142.4000244140625" style="-fx-background-color: #9299d6;" text="Username" />
+                        <TableColumn id="statusCol" fx:id="numeCol" prefWidth="161.60000610351562" style="-fx-background-color: #8086bd;" text="Nume" />
+                        <TableColumn id="sefCol" fx:id="timeCol" prefWidth="154.39990234375" style="-fx-background-color: #9299d6;" text="LoginTime" />
+                     </columns>
+                  </TableView>
+                  <Label id="nameLabel" fx:id="nameLabel12" layoutX="556.0" layoutY="12.0" prefHeight="23.0" prefWidth="136.0" style="-fx-border-color: #9BA3EB; -fx-border-radius: 7;" text="Angajati prezenti" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label id="nameLabel" fx:id="nameLabel111" layoutX="8.0" layoutY="12.0" prefHeight="23.0" prefWidth="245.0" style="-fx-border-color: #9BA3EB; -fx-border-radius: 7;" text=" Trimite sarcina spre un angajat" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="18.0" />
+                     </font>
+                  </Label>
+                  <Button id="trimiteBtn" fx:id="trimiteBtn" layoutX="12.0" layoutY="212.0" mnemonicParsing="false" onAction="#trimite_sarcina" prefHeight="27.0" prefWidth="142.0" style="-fx-background-color: #C0DBEA;" text="Trimite" textFill="#474a6b">
+                     <font>
+                        <Font name="Berlin Sans FB" size="15.0" />
+                     </font>
+                  </Button>
+                  <TextField id="searchField" fx:id="descriereField" focusTraversable="false" layoutX="8.0" layoutY="108.0" prefHeight="88.0" prefWidth="222.0" promptText="Descriere sarcina" style="-fx-background-color: #404258; -fx-border-color: #9BA3EB; -fx-background-radius: 10; -fx-border-radius: 10; -fx-text-fill: white;" />
+               </children>
+            </AnchorPane>
+            <Button fx:id="refreshBtn" layoutX="642.0" layoutY="13.0" mnemonicParsing="false" onAction="#refresh_for_sef" prefHeight="27.0" prefWidth="95.0" style="-fx-background-color: #E8A0BF;" text="Refresh" textFill="#474a6b">
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
